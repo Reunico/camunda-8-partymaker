@@ -2,6 +2,7 @@ package com.example.camunda8.service;
 
 import com.example.camunda8.model.Order;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public interface OrderService {
@@ -10,7 +11,7 @@ public interface OrderService {
             Order order,
                         String description,
                         String contractor,
-                        Date orderDate,
+                        LocalDate orderDate,
                         String customerName,
                         String title,
                         Long amount

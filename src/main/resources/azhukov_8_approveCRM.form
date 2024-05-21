@@ -65,18 +65,6 @@
       "key": "order.contractor"
     },
     {
-      "subtype": "date",
-      "dateLabel": "Date",
-      "label": "Date time",
-      "type": "datetime",
-      "layout": {
-        "row": "Row_0uca72s",
-        "columns": null
-      },
-      "id": "Field_165bsyg",
-      "key": "order.orderDate"
-    },
-    {
       "label": "Text field OrderDate",
       "type": "textfield",
       "layout": {
@@ -98,7 +86,7 @@
         "columns": null
       },
       "id": "Field_00jytkn",
-      "key": "datetime_ew6lfh",
+      "key": "order.orderDate",
       "readonly": "true"
     },
     {

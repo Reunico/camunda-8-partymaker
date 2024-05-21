@@ -5,6 +5,7 @@ import com.example.camunda8.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -16,7 +17,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order persistOrder(Order order, String description, String contractor, Date orderDate, String customerName, String title, Long amount) {
+    public Order persistOrder(Order order, String description, String contractor, LocalDate orderDate, String customerName, String title, Long amount) {
         if (order == null) {order = new Order();}
         order.setDescription(description);
         order.setContractor(contractor);

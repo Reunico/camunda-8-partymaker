@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public class Order implements Serializable {
 
     private String description;
     private String contractor;
-    private Date orderDate;
+    private LocalDate orderDate;
 
     public Order(){}
 }

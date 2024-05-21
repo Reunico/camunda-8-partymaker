@@ -5,6 +5,7 @@ import com.example.camunda8.model.Order;
 import com.example.camunda8.service.OrderService;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
@@ -33,7 +34,7 @@ public class PersistOrderWorker {
   public void persistOrderWorker(final ActivatedJob job) throws Exception {
     LOG.warn("sh_zh before persistOrder_test : Persist Order content: ");
 
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     Order order = mapper.convertValue(job.getVariable(ProcessVariableConstant.ORDER), Order.class);
     LOG.warn("sh_zh job.getVariablesAsType persistOrder_test : {}", order);
     Order orderPersist = orderService.persistOrder( order,

@@ -8,12 +8,16 @@
         </inputExpression>
       </input>
       <output id="Output_1" name="descr" typeRef="string" />
+      <output id="OutputClause_0iaa8lf" name="comment" typeRef="string" />
       <rule id="DecisionRule_0j2619g">
         <inputEntry id="UnaryTests_1hyzw6s">
           <text>[1..100]</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1vbs2x6">
           <text>"Конфета"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0vi8dp1">
+          <text>"comment1"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1ry74yz">
@@ -23,6 +27,9 @@
         <outputEntry id="LiteralExpression_017ax7q">
           <text>"Прогулка"</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_1dr43el">
+          <text>"comment2"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_0gdtk3u">
         <inputEntry id="UnaryTests_0vzyt2a">
@@ -31,6 +38,9 @@
         <outputEntry id="LiteralExpression_1xh0vqr">
           <text>"Сафари"</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_03481gd">
+          <text>"comment3"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_0rvfize">
         <inputEntry id="UnaryTests_02spg7t">
@@ -38,6 +48,9 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_0gx5faf">
           <text>"Тур"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cnhooy">
+          <text>"comment4"</text>
         </outputEntry>
       </rule>
     </decisionTable>

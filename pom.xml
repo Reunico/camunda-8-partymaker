@@ -56,10 +56,11 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-
+<!-- Версия 2.1.210 Более свежие не поддерживаются дбивер и Idea-->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+			<version>2.1.210</version>
 		</dependency>
 
 		<dependency>

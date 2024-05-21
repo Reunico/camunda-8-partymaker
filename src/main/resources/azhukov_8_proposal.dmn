@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_04ddw6h" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.23.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <decision id="azhukov_8_proposal" name="Определение предложения">
+    <decisionTable id="DecisionTable_189o58j" hitPolicy="FIRST">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>order.amount</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="descr" typeRef="string" />
+      <rule id="DecisionRule_0j2619g">
+        <inputEntry id="UnaryTests_1hyzw6s">
+          <text>[1..100]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vbs2x6">
+          <text>"Конфета"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ry74yz">
+        <inputEntry id="UnaryTests_09724u7">
+          <text>[101..300]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_017ax7q">
+          <text>"Прогулка"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0gdtk3u">
+        <inputEntry id="UnaryTests_0vzyt2a">
+          <text>[301..700]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1xh0vqr">
+          <text>"Сафари"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0rvfize">
+        <inputEntry id="UnaryTests_02spg7t">
+          <text>&gt;700</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gx5faf">
+          <text>"Тур"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="azhukov_8_proposal">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

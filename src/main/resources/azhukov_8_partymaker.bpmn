@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="Definitions_0o87biy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.23.0">
+  <bpmn:process id="azhukov_8_partymaker" name="azhukov Partymaker" isExecutable="true">
+    <bpmn:extensionElements>
+      <zeebe:userTaskForm id="UserTaskForm_0eqh9nc">{"components":[{"id":"textfield1","key":"message_content","label":"E-Mail Content","type":"textfield","parent":"default1","path":["components",0],"description":"Please enter the content of the E-Mail message","validate":{"required":true}}],"type":"default","id":"default1","path":[]}</zeebe:userTaskForm>
+      <zeebe:userTaskForm id="UserTaskForm_1a4b03i">{
+  "components": [
+    {
+      "label": "Имя Клиента",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_18gy4ar",
+        "columns": null
+      },
+      "id": "Field_196hlfm",
+      "key": "order.fullName"
+    },
+    {
+      "label": "Должность",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0vjyhak",
+        "columns": null
+      },
+      "id": "Field_0o1mb30",
+      "key": "order.title"
+    },
+    {
+      "label": "Бюджет",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0jamhx7",
+        "columns": null
+      },
+      "id": "Field_16gaf6t",
+      "key": "order.amount"
+    },
+    {
+      "label": "Описание",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1hhpeaf",
+        "columns": null
+      },
+      "id": "Field_0hhkqfm",
+      "key": "order.description"
+    },
+    {
+      "values": [
+        {
+          "label": "Иванов",
+          "value": "ИП Иванов"
+        },
+        {
+          "label": "Петров",
+          "value": "ИП Петров"
+        },
+        {
+          "label": "Сидоров",
+          "value": "ИП Сидоров"
+        }
+      ],
+      "label": "Исполнитель",
+      "type": "select",
+      "layout": {
+        "row": "Row_1q5stks",
+        "columns": null
+      },
+      "id": "Field_1rm2h7y",
+      "key": "order.contractor"
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Date",
+      "label": "Date time",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_0uca72s",
+        "columns": null
+      },
+      "id": "Field_165bsyg",
+      "key": "order.orderDate"
+    },
+    {
+      "values": [
+        {
+          "label": "Да",
+          "value": "yes"
+        },
+        {
+          "label": "Нет",
+          "value": "no"
+        }
+      ],
+      "label": "Согласовано?",
+      "type": "select",
+      "layout": {
+        "row": "Row_1l922fk",
+        "columns": null
+      },
+      "id": "Field_0sndare",
+      "key": "approved"
+    }
+  ],
+  "type": "default",
+  "id": "azhukov_8_approveCRM",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.5.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "schemaVersion": 16
+}</zeebe:userTaskForm>
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="StartEvent" name="Start">
+      <bpmn:outgoing>Flow_19f2xg6</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_19f2xg6" sourceRef="StartEvent" targetRef="enterMessageTask" />
+    <bpmn:sequenceFlow id="Flow_0xoo3ml" sourceRef="approveOrder" targetRef="Gateway_0mz4rbf" />
+    <bpmn:endEvent id="EndEvent" name="End">
+      <bpmn:incoming>Flow_156krfs</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="approveOrder" name="Подтвердить заказ">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="humanTask" />
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1a4b03i" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1oziiml</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xoo3ml</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1ylikwe" sourceRef="Activity_getOrder" targetRef="Activity_0hm6h4y" />
+    <bpmn:serviceTask id="Activity_getOrder" name="Загрузить данные с сайта">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="getOrder" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1dqu6kl</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ylikwe</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="enterMessageTask" name="Enter Message">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_0eqh9nc" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_19f2xg6</bpmn:incoming>
+      <bpmn:outgoing>Flow_1dqu6kl</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1dqu6kl" sourceRef="enterMessageTask" targetRef="Activity_getOrder" />
+    <bpmn:exclusiveGateway id="Gateway_1jbolip" default="Flow_0zx7ar9">
+      <bpmn:incoming>Flow_071jwqk</bpmn:incoming>
+      <bpmn:outgoing>Flow_17ke7it</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0zx7ar9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_17ke7it" name="Согласовано" sourceRef="Gateway_1jbolip" targetRef="Activity_0xl92h5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=approved = "yes"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_1guw12z">
+      <bpmn:incoming>Flow_0zx7ar9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0zx7ar9" sourceRef="Gateway_1jbolip" targetRef="Event_1guw12z" />
+    <bpmn:userTask id="Activity_0xl92h5" name="Отправить данные в CRM">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formId="azhukov_8_approveCRM" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_17ke7it</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jhqzx3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1jhqzx3" sourceRef="Activity_0xl92h5" targetRef="Activity_saveOrder" />
+    <bpmn:sequenceFlow id="Flow_071jwqk" sourceRef="Activity_persistOrder" targetRef="Gateway_1jbolip" />
+    <bpmn:serviceTask id="Activity_persistOrder" name="Сохранить в базу">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="persistOrder" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1bhjftq</bpmn:incoming>
+      <bpmn:outgoing>Flow_071jwqk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_156krfs" sourceRef="Activity_saveOrder" targetRef="EndEvent" />
+    <bpmn:serviceTask id="Activity_saveOrder" name="Переслать данные в CRM">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="saveOrder" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1jhqzx3</bpmn:incoming>
+      <bpmn:outgoing>Flow_156krfs</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="Event_1atl66x" attachedToRef="Activity_getOrder">
+      <bpmn:outgoing>Flow_0f2zm8d</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_12vhp2s" errorRef="Error_0ifebpm" />
+    </bpmn:boundaryEvent>
+    <bpmn:exclusiveGateway id="Gateway_0mz4rbf">
+      <bpmn:incoming>Flow_0xoo3ml</bpmn:incoming>
+      <bpmn:incoming>Flow_1id51qr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bhjftq</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1bhjftq" sourceRef="Gateway_0mz4rbf" targetRef="Activity_persistOrder" />
+    <bpmn:sequenceFlow id="Flow_0f2zm8d" sourceRef="Event_1atl66x" targetRef="Activity_manual" />
+    <bpmn:sequenceFlow id="Flow_1id51qr" sourceRef="Activity_manual" targetRef="Gateway_0mz4rbf" />
+    <bpmn:userTask id="Activity_manual" name="Завести заказ по телефону">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formId="azhukov_8_approveCRM" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0f2zm8d</bpmn:incoming>
+      <bpmn:outgoing>Flow_1id51qr</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1oziiml" sourceRef="Activity_0hm6h4y" targetRef="approveOrder" />
+    <bpmn:businessRuleTask id="Activity_0hm6h4y" name="Определение предложения">
+      <bpmn:extensionElements>
+        <zeebe:calledDecision decisionId="azhukov_8_proposal" resultVariable="order2" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=order2" target="order.description" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ylikwe</bpmn:incoming>
+      <bpmn:outgoing>Flow_1oziiml</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+  </bpmn:process>
+  <bpmn:error id="Error_0ifebpm" name="Error_1o6amcb" errorCode="getOrderError" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="azhukov_8_partymaker">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent">
+        <dc:Bounds x="132" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="138" y="185" width="25" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1oy8ygp_di" bpmnElement="EndEvent">
+        <dc:Bounds x="1332" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1340" y="185" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0s2tnku_di" bpmnElement="approveOrder">
+        <dc:Bounds x="610" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0jg300d_di" bpmnElement="Activity_getOrder">
+        <dc:Bounds x="330" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_12hfyxd" bpmnElement="enterMessageTask">
+        <dc:Bounds x="200" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1jbolip_di" bpmnElement="Gateway_1jbolip" isMarkerVisible="true">
+        <dc:Bounds x="955" y="135" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1guw12z_di" bpmnElement="Event_1guw12z">
+        <dc:Bounds x="1292" y="292" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1utxi01" bpmnElement="Activity_0xl92h5">
+        <dc:Bounds x="1040" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0jbxkh9_di" bpmnElement="Activity_persistOrder">
+        <dc:Bounds x="830" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hgvc63_di" bpmnElement="Activity_saveOrder">
+        <dc:Bounds x="1170" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0mz4rbf_di" bpmnElement="Gateway_0mz4rbf" isMarkerVisible="true">
+        <dc:Bounds x="745" y="135" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1dcjte8_di" bpmnElement="Activity_manual">
+        <dc:Bounds x="500" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qdzti2_di" bpmnElement="Activity_0hm6h4y">
+        <dc:Bounds x="460" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_050q45t_di" bpmnElement="Event_1atl66x">
+        <dc:Bounds x="392" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_19f2xg6_di" bpmnElement="Flow_19f2xg6">
+        <di:waypoint x="168" y="160" />
+        <di:waypoint x="200" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xoo3ml_di" bpmnElement="Flow_0xoo3ml">
+        <di:waypoint x="710" y="160" />
+        <di:waypoint x="745" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ylikwe_di" bpmnElement="Flow_1ylikwe">
+        <di:waypoint x="430" y="160" />
+        <di:waypoint x="460" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dqu6kl_di" bpmnElement="Flow_1dqu6kl">
+        <di:waypoint x="300" y="160" />
+        <di:waypoint x="330" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17ke7it_di" bpmnElement="Flow_17ke7it">
+        <di:waypoint x="1005" y="160" />
+        <di:waypoint x="1040" y="160" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="977" y="113" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zx7ar9_di" bpmnElement="Flow_0zx7ar9">
+        <di:waypoint x="980" y="185" />
+        <di:waypoint x="980" y="310" />
+        <di:waypoint x="1292" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jhqzx3_di" bpmnElement="Flow_1jhqzx3">
+        <di:waypoint x="1140" y="160" />
+        <di:waypoint x="1170" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_071jwqk_di" bpmnElement="Flow_071jwqk">
+        <di:waypoint x="930" y="160" />
+        <di:waypoint x="955" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_156krfs_di" bpmnElement="Flow_156krfs">
+        <di:waypoint x="1270" y="160" />
+        <di:waypoint x="1332" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bhjftq_di" bpmnElement="Flow_1bhjftq">
+        <di:waypoint x="795" y="160" />
+        <di:waypoint x="830" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0f2zm8d_di" bpmnElement="Flow_0f2zm8d">
+        <di:waypoint x="410" y="218" />
+        <di:waypoint x="410" y="290" />
+        <di:waypoint x="500" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1id51qr_di" bpmnElement="Flow_1id51qr">
+        <di:waypoint x="600" y="290" />
+        <di:waypoint x="770" y="290" />
+        <di:waypoint x="770" y="185" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1oziiml_di" bpmnElement="Flow_1oziiml">
+        <di:waypoint x="560" y="160" />
+        <di:waypoint x="610" y="160" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

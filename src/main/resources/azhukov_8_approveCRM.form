@@ -1,0 +1,134 @@
+{
+  "components": [
+    {
+      "label": "Имя Клиента",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_18gy4ar",
+        "columns": null
+      },
+      "id": "Field_196hlfm",
+      "key": "order.fullName"
+    },
+    {
+      "label": "Должность",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0vjyhak",
+        "columns": null
+      },
+      "id": "Field_0o1mb30",
+      "key": "order.title"
+    },
+    {
+      "label": "Бюджет",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0jamhx7",
+        "columns": null
+      },
+      "id": "Field_16gaf6t",
+      "key": "order.amount"
+    },
+    {
+      "label": "Описание",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1hhpeaf",
+        "columns": null
+      },
+      "id": "Field_0hhkqfm",
+      "key": "order.description"
+    },
+    {
+      "values": [
+        {
+          "label": "Иванов",
+          "value": "ИП Иванов"
+        },
+        {
+          "label": "Петров",
+          "value": "ИП Петров"
+        },
+        {
+          "label": "Сидоров",
+          "value": "ИП Сидоров"
+        }
+      ],
+      "label": "Исполнитель",
+      "type": "select",
+      "layout": {
+        "row": "Row_1q5stks",
+        "columns": null
+      },
+      "id": "Field_1rm2h7y",
+      "key": "order.contractor"
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Date",
+      "label": "Date time",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_0uca72s",
+        "columns": null
+      },
+      "id": "Field_165bsyg",
+      "key": "order.orderDate"
+    },
+    {
+      "label": "Text field OrderDate",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1kjy4hw",
+        "columns": null
+      },
+      "id": "Field_0d1gj2f",
+      "key": "wwww",
+      "defaultValue": "order.orderDate",
+      "readonly": true
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Date orderDate",
+      "label": "Date time",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_048jcea",
+        "columns": null
+      },
+      "id": "Field_00jytkn",
+      "key": "datetime_ew6lfh",
+      "readonly": "true"
+    },
+    {
+      "values": [
+        {
+          "label": "Да",
+          "value": "yes"
+        },
+        {
+          "label": "Нет",
+          "value": "no"
+        }
+      ],
+      "label": "Согласовано?",
+      "type": "select",
+      "layout": {
+        "row": "Row_1l922fk",
+        "columns": null
+      },
+      "id": "Field_0sndare",
+      "key": "approved"
+    }
+  ],
+  "type": "default",
+  "id": "azhukov_8_approveCRM",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.5.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "schemaVersion": 16
+}

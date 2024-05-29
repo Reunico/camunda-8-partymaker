@@ -1,7 +1,7 @@
 package com.example.camunda8;
 
 import io.camunda.zeebe.client.ZeebeClient;
-import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
+
 import io.camunda.zeebe.spring.client.annotation.Deployment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Map;
 
 @SpringBootApplication
-@Deployment(resources = "classpath:azhukov_8_partymaker.bpmn")
+@Deployment(resources = "classpath:./process/*.*")
+
 public class Camunda8Application implements CommandLineRunner {
 
 	private final static Logger LOG = LoggerFactory.getLogger(Camunda8Application.class);
